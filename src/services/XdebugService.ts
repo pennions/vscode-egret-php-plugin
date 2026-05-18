@@ -107,12 +107,16 @@ export class XdebugService {
 
     const iniPath = path.join(phpInstallPath, 'php.ini');
     if (fs.existsSync(iniPath)) {
-      const answer = await vscode.window.showInformationMessage(
-        `Xdebug ${build.version} installed. Add zend_extension="${dllName}" to php.ini?`,
-        'Yes', 'No'
-      );
-      if (answer === 'Yes') {
-        fs.appendFileSync(iniPath, `\n[xdebug]\nzend_extension="${destPath}"\n`);
+      const iniContent = fs.readFileSync(iniPath, 'utf8');
+      const alreadySet = new RegExp(`^\\s*zend_extension\\s*=\\s*["']?${escapeRegex(destPath)}["']?`, 'm').test(iniContent);
+      if (!alreadySet) {
+        const answer = await vscode.window.showInformationMessage(
+          `Xdebug ${build.version} installed. Add zend_extension to php.ini?`,
+          'Yes', 'No'
+        );
+        if (answer === 'Yes') {
+          fs.appendFileSync(iniPath, `\n[xdebug]\nzend_extension="${destPath}"\n`);
+        }
       }
     }
   }
@@ -124,4 +128,8 @@ export class XdebugService {
       // best effort
     }
   }
+}
+
+function escapeRegex(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
