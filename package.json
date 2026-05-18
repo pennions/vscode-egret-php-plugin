@@ -2,12 +2,13 @@
   "name": "vscode-egret-php-plugin",
   "displayName": "Egret PHP",
   "description": "Manage PHP versions, Xdebug, and PATH — Windows first, Linux/Mac coming.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "Pennions",
   "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
   },
+  "icon": "resources/egret-icon.png",
   "categories": ["Other"],
   "repository": {
     "type": "git",
