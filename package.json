@@ -1,0 +1,180 @@
+{
+  "name": "egret-php",
+  "displayName": "Egret PHP",
+  "description": "Manage PHP versions, Xdebug, and PATH — Windows first, Linux/Mac coming.",
+  "version": "0.1.0",
+  "publisher": "Pennions",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pennions/egret-php"
+  },
+  "keywords": ["php", "version manager", "xdebug", "windows"],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "egret-php.refreshVersions",
+        "title": "Refresh PHP Versions",
+        "icon": "$(refresh)",
+        "category": "Egret PHP"
+      },
+      {
+        "command": "egret-php.downloadPhp",
+        "title": "Download PHP Version",
+        "icon": "$(cloud-download)",
+        "category": "Egret PHP"
+      },
+      {
+        "command": "egret-php.setActive",
+        "title": "Set as Active PHP",
+        "icon": "$(check)",
+        "category": "Egret PHP"
+      },
+      {
+        "command": "egret-php.addToPath",
+        "title": "Add PHP to PATH",
+        "category": "Egret PHP"
+      },
+      {
+        "command": "egret-php.removeFromPath",
+        "title": "Remove PHP from PATH",
+        "category": "Egret PHP"
+      },
+      {
+        "command": "egret-php.downloadXdebug",
+        "title": "Download & Install Xdebug",
+        "icon": "$(extensions)",
+        "category": "Egret PHP"
+      },
+      {
+        "command": "egret-php.openPhpIni",
+        "title": "Open php.ini",
+        "icon": "$(gear)",
+        "category": "Egret PHP"
+      },
+      {
+        "command": "egret-php.uninstallPhp",
+        "title": "Uninstall PHP Version",
+        "icon": "$(trash)",
+        "category": "Egret PHP"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "egret-php-explorer",
+          "title": "Egret PHP",
+          "icon": "resources/egret-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "egret-php-explorer": [
+        {
+          "id": "egretPhpVersions",
+          "name": "PHP Versions",
+          "icon": "$(versions)"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "egret-php.refreshVersions",
+          "when": "view == egretPhpVersions",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "egret-php.downloadPhp",
+          "when": "view == egretPhpVersions && viewItem == remotePhpVersion",
+          "group": "inline@1"
+        },
+        {
+          "command": "egret-php.setActive",
+          "when": "view == egretPhpVersions && viewItem == installedPhpVersion",
+          "group": "inline@1"
+        },
+        {
+          "command": "egret-php.openPhpIni",
+          "when": "view == egretPhpVersions && viewItem == installedPhpVersion",
+          "group": "inline@2"
+        },
+        {
+          "command": "egret-php.downloadXdebug",
+          "when": "view == egretPhpVersions && viewItem == installedPhpVersion",
+          "group": "inline@3"
+        },
+        {
+          "command": "egret-php.addToPath",
+          "when": "view == egretPhpVersions && viewItem == installedPhpVersion",
+          "group": "manage@1"
+        },
+        {
+          "command": "egret-php.removeFromPath",
+          "when": "view == egretPhpVersions && viewItem == installedPhpVersion",
+          "group": "manage@2"
+        },
+        {
+          "command": "egret-php.uninstallPhp",
+          "when": "view == egretPhpVersions && viewItem == installedPhpVersion",
+          "group": "danger@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Egret PHP Stack",
+      "properties": {
+        "egret-php.installDirectory": {
+          "type": "string",
+          "default": "",
+          "description": "Base directory for PHP installations. Leave empty to be prompted on first download."
+        },
+        "egret-php.preferNts": {
+          "type": "boolean",
+          "default": true,
+          "description": "Prefer Non-Thread-Safe (NTS) builds when downloading PHP."
+        },
+        "egret-php.architecture": {
+          "type": "string",
+          "enum": ["x64", "x86"],
+          "default": "x64",
+          "description": "Preferred CPU architecture for PHP downloads."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "node esbuild.js --production",
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "pretest": "node esbuild.js",
+    "test": "node ./out/test/runTests.js",
+    "package": "vsce package",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.5",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "@vscode/test-electron": "^2.3.8",
+    "@vscode/vsce": "^2.23.0",
+    "esbuild": "^0.20.0",
+    "eslint": "^8.56.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.10"
+  }
+}
