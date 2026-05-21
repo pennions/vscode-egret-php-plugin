@@ -115,7 +115,7 @@ export class XdebugService {
           'Yes', 'No'
         );
         if (answer === 'Yes') {
-          fs.appendFileSync(iniPath, `\n[xdebug]\nzend_extension="${destPath}"\n`);
+          fs.appendFileSync(iniPath, `\n[xdebug]\nzend_extension="${destPath}"\nxdebug.mode=debug\nxdebug.start_with_request=yes\nxdebug.client_host=localhost\nxdebug.client_port=9003\n`);
         }
       }
     }
