@@ -1,8 +1,6 @@
-# Egret PHP Stack
+# Egret PHP
 
 A VS Code extension for managing PHP versions on Windows. Download, switch, and configure PHP — including Xdebug — without leaving the editor.
-
-> Linux and macOS support is planned for a future release.
 
 ---
 
@@ -21,7 +19,7 @@ A VS Code extension for managing PHP versions on Windows. Download, switch, and 
 1. Install the extension from the `.vsix` file:
    - Open the Extensions panel (`Ctrl+Shift+X`)
    - Click `...` → **Install from VSIX…**
-   - Select `egret-php-stack-0.1.0.vsix`
+   - Select `vscode-egret-php-plugin-x.y.z.vsix`
 2. Click the **Egret PHP** icon in the Activity Bar (left sidebar).
 3. The **Available** group lists all downloadable PHP versions. The **Installed** group shows versions already on your machine.
 
